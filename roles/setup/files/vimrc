@@ -1,0 +1,33 @@
+" more responsive escape key
+set timeoutlen=1000
+set ttimeoutlen=0
+
+" search options
+set ignorecase
+set incsearch
+set hlsearch
+
+" indentation stuff
+set tabstop=4
+set shiftwidth=4
+set autoindent copyindent
+set smarttab expandtab
+
+" stay in visual mode after identation
+vmap > >gv
+vmap < <gv
+
+" j k scroll by actual lines
+nnoremap k gk
+nnoremap j gj
+
+" fix backspace in insert mode
+set backspace=indent,eol,start
+
+" general settings
+syntax on
+set nocompatible
+set ruler number
+set visualbell
+set history=1000
+set colorcolumn=80

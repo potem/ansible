@@ -1,0 +1,43 @@
+---
+- name: Add stable repo
+  apt_repository:
+    repo: deb http://deb.debian.org/debian stable main
+    state: present
+- name: Add stable/updates repo
+  apt_repository:
+    repo: deb http://deb.debian.org/debian-security/ stable/updates main
+    state: present
+- name: Add buster-updates repo
+  apt_repository:
+    repo: deb http://deb.debian.org/debian buster-updates main
+    state: present
+- name: Add buster backports repo
+  apt_repository:
+    repo: deb http://deb.debian.org/debian buster-backports main contrib
+    state: present
+- name: Debian update
+  apt:
+    update_cache: yes
+    upgrade: dist
+- name: Install
+  apt:
+    name: vim-nox
+    state: present
+- name: configuring vim
+  copy:
+    src: vimrc
+    dest: /etc/vimrc
+    mode: '0644'
+- name: Install cli tools
+  apt:
+    pkg:
+    - tmux
+    - ncdu
+    - python3
+    - vifm
+- name: Reboot on panic
+  sysctl:
+    name: kernel.panic
+    value: '3'
+    state: present
+    reload: yes
