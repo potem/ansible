@@ -1,0 +1,25 @@
+---
+- tasks:
+  - name: Add ansible user
+    user:
+      # TODO ansible user into var
+      name: ansible
+      shell: /bin/bash
+      state: present
+  - name: add ssh key
+    authorized_key:
+      # TODO ansible user into var
+      user: ansible
+      key: 'AAAAC3NzaC1lZDI1NTE5AAAAIHFpZxPmUGyzbAarPpWLoEYQgbS3/EmUEQzPnlaBa5ob'
+  - name: install sudo
+    apt:
+      name: sudo
+      state: present
+  - name: add ansible user to sudoers w/o password
+    lineinfile:
+      dest: /etc/sudoers
+      state: present
+      # TODO ansible user into var
+      regexp: '^ansible ALL\='
+      line: 'ansible ALL=(ALL) NOPASSWD:ALL'
+      validate: 'visudo -cf %s'

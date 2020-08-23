@@ -1,0 +1,9 @@
+---
+- name: setup up ansible user stuff
+  hosts: all
+  remote_user: root
+  vars:
+    deploy_username: ansible
+
+  roles:
+    - ansible
