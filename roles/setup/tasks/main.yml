@@ -1,17 +1,16 @@
 ---
-- name: Debian update
+- name: Install automatic updates
   apt:
-    update_cache: yes
-    upgrade: dist
-- name: Install
-  apt:
-    name: vim-nox
-    state: present
-- name: configuring vim
+    pkg:
+    - unattended-upgrades
+    - apt-listchanges
+- name: Configure automatic updates
   copy:
-    src: vimrc
-    dest: /etc/vimrc
-    mode: '0644'
+    src: "{{ item }}"
+    dest: /etc/apt/apt.conf.d/
+  with_items:
+    - 20auto-upgrades
+    - 50unattended-upgrades
 - name: Install cli tools
   apt:
     pkg:
@@ -19,6 +18,12 @@
     - ncdu
     - python3
     - vifm
+    - vim-nox
+- name: Configuring vim
+  copy:
+    src: vimrc
+    dest: /etc/vimrc
+    mode: '0644'
 - name: Reboot on panic
   sysctl:
     name: kernel.panic
