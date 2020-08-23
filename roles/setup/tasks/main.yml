@@ -1,20 +1,4 @@
 ---
-- name: Add stable repo
-  apt_repository:
-    repo: deb http://deb.debian.org/debian stable main
-    state: present
-- name: Add stable/updates repo
-  apt_repository:
-    repo: deb http://deb.debian.org/debian-security/ stable/updates main
-    state: present
-- name: Add buster-updates repo
-  apt_repository:
-    repo: deb http://deb.debian.org/debian buster-updates main
-    state: present
-- name: Add buster backports repo
-  apt_repository:
-    repo: deb http://deb.debian.org/debian buster-backports main contrib
-    state: present
 - name: Debian update
   apt:
     update_cache: yes
