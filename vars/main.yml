@@ -1,6 +1,0 @@
----
-deployment_user: ansible
-deployment_key: 'AAAAC3NzaC1lZDI1NTE5AAAAIHFpZxPmUGyzbAarPpWLoEYQgbS3/EmUEQzPnlaBa5ob'
-initial_users:
-  tom: 'AAAAC3NzaC1lZDI1NTE5AAAAIM3IQs+AnuCZS2QokyDGtWEmBYWvvLZb5lMJWoq1nhVo'
-

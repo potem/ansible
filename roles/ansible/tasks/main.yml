@@ -1,22 +1,21 @@
 ---
-- tasks:
-  - name: Add ansible user
-    user:
-      name: "{{ deployment_username }}"
-      shell: /bin/bash
-      state: present
-  - name: add ssh key
-    authorized_key:
-      user: "{{ deployment_username }}"
-      key: "{{ deployment_key }}"
-  - name: install sudo
-    apt:
-      name: sudo
-      state: present
-  - name: add ansible user to sudoers w/o password
-    lineinfile:
-      dest: /etc/sudoers
-      state: present
-      regexp: "^{{ deployment_username }} ALL\="
-      line: "{{ deployment_username }} ALL=(ALL) NOPASSWD:ALL"
-      validate: "visudo -cf %s"
+- name: Add ansible user
+  user:
+    name: "{{ deployment_user }}"
+    shell: /bin/bash
+    state: present
+- name: add ssh key
+  authorized_key:
+    user: "{{ deployment_user }}"
+    key: "{{ deployment_key }}"
+- name: install sudo
+  apt:
+    name: sudo
+    state: present
+- name: add ansible user to sudoers w/o password
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: "^{{ deployment_user }} ALL="
+    line: "{{ deployment_user }} ALL=(ALL) NOPASSWD:ALL"
+    validate: "visudo -cf %s"
