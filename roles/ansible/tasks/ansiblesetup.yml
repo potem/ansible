@@ -2,14 +2,12 @@
 - tasks:
   - name: Add ansible user
     user:
-      # TODO ansible user into var
-      name: ansible
+      name: "{{ deployment_username }}"
       shell: /bin/bash
       state: present
   - name: add ssh key
     authorized_key:
-      # TODO ansible user into var
-      user: ansible
+      user: "{{ deployment_username }}"
       key: 'AAAAC3NzaC1lZDI1NTE5AAAAIHFpZxPmUGyzbAarPpWLoEYQgbS3/EmUEQzPnlaBa5ob'
   - name: install sudo
     apt:
@@ -19,7 +17,6 @@
     lineinfile:
       dest: /etc/sudoers
       state: present
-      # TODO ansible user into var
-      regexp: '^ansible ALL\='
-      line: 'ansible ALL=(ALL) NOPASSWD:ALL'
-      validate: 'visudo -cf %s'
+      regexp: "^{{ deployment_username }} ALL\="
+      line: "{{ deployment_username }} ALL=(ALL) NOPASSWD:ALL"
+      validate: "visudo -cf %s"
