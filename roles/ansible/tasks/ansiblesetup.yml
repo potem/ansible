@@ -8,7 +8,7 @@
   - name: add ssh key
     authorized_key:
       user: "{{ deployment_username }}"
-      key: 'AAAAC3NzaC1lZDI1NTE5AAAAIHFpZxPmUGyzbAarPpWLoEYQgbS3/EmUEQzPnlaBa5ob'
+      key: "{{ deployment_key }}"
   - name: install sudo
     apt:
       name: sudo
