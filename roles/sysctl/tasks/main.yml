@@ -7,3 +7,4 @@
       state: present
       reload: yes
     with_dict: '{{ sysctl_settings }}'
+    become: yes

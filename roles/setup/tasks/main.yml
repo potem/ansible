@@ -23,18 +23,19 @@
   copy:
     src: vimrc
     dest: /etc/vimrc
-    mode: '0644'
+    mode: "0644"
 - name: Set up inital users
   user:
-    name: '{{ item.key }}'
-    shell: '/bin/bash'
+    name: "{{ item.key }}"
+    shell: "/bin/bash"
     create_home: True
-    present: True
-  with_dict: '{{ initial_users }}'
+    state: present
+  with_dict: "{{ additional_users }}"
+  become: yes
 - name: Set up ssh keys
   authorized_key:
-    user: '{{ item.key }}'
-    key: '{{ item.value }}'
-    state: present
-  with_dict: '{{ initial_users }}'
+    user: "{{ item.key }}"
+    key: "{{ item.value }}"
+  with_dict: "{{ additional_users }}"
+  become: yes
 
