@@ -47,3 +47,7 @@ sysctl_settings:
   kernel.yama.ptrace_scope: 1
   # Set perf only available to root
   kernel.perf_event_paranoid: 2
+
+
+  # Set reboot timer for kernel panic
+  kernel.panic: 10

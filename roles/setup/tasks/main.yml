@@ -24,9 +24,3 @@
     src: vimrc
     dest: /etc/vimrc
     mode: '0644'
-- name: Reboot on panic
-  sysctl:
-    name: kernel.panic
-    value: '3'
-    state: present
-    reload: yes
