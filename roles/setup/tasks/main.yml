@@ -6,7 +6,7 @@
     - apt-listchanges
 - name: Configure automatic updates
   copy:
-    src: "{{ item }}"
+    src: '{{ item }}'
     dest: /etc/apt/apt.conf.d/
   with_items:
     - 20auto-upgrades
@@ -19,23 +19,34 @@
     - python3
     - vifm
     - vim-nox
+- name: Create wheel group
+  group:
+    name: wheel
+    state: present
+  become: yes
+- name: Enable pam wheel
+  lineinfile:
+    path: /etc/pam.d/su
+    regexp: '^#auth       required pam_wheel.so'
+    line: 'auth       required pam_wheel.so'
+  become: yes
 - name: Configuring vim
   copy:
     src: vimrc
     dest: /etc/vimrc
-    mode: "0644"
+    mode: '0644'
 - name: Set up inital users
   user:
-    name: "{{ item.key }}"
-    shell: "/bin/bash"
+    name: '{{ item.key }}'
+    shell: '/bin/bash'
+    groups: wheel
     create_home: True
     state: present
-  with_dict: "{{ additional_users }}"
+  with_dict: '{{ additional_users }}'
   become: yes
 - name: Set up ssh keys
   authorized_key:
-    user: "{{ item.key }}"
-    key: "{{ item.value }}"
-  with_dict: "{{ additional_users }}"
+    user: '{{ item.key }}'
+    key: '{{ item.value }}'
+  with_dict: '{{ additional_users }}'
   become: yes
-
