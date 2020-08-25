@@ -1,4 +1,5 @@
 ---
 # user : ssh-key-string
 additional_users: {}
+ssh_listen_port: 22
 

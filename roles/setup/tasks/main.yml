@@ -8,6 +8,7 @@
   copy:
     src: '{{ item }}'
     dest: /etc/apt/apt.conf.d/
+    mode: '0644'
   with_items:
     - 20auto-upgrades
     - 50unattended-upgrades
@@ -50,3 +51,4 @@
     key: '{{ item.value }}'
   with_dict: '{{ additional_users }}'
   become: yes
+- include_tasks: ssh.yml

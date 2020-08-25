@@ -3,6 +3,7 @@
   user:
     name: "{{ deployment_user }}"
     shell: /bin/bash
+    create_home: yes
     state: present
 - name: add ssh key
   authorized_key:
